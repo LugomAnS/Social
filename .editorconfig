@@ -8,3 +8,11 @@ charset = utf-8
 trim_trailing_whitespace = true
 indent_style = space
 indent_size = 2
+
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.formatOnSave": true
+  }
+}
