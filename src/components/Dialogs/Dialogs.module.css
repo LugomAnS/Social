@@ -1,0 +1,26 @@
+.dialogPage {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  background-color: rgb(23, 179, 127);
+}
+
+.dialogs {
+  padding: 10px;
+}
+
+.dialog  a{
+  color: white;
+  text-decoration: none;
+}
+
+a.dialogActive {
+  color: gold;
+}
+
+.messages {
+  padding: 10px;
+}
+
+.message {
+
+}
