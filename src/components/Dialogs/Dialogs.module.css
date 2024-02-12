@@ -8,19 +8,7 @@
   padding: 10px;
 }
 
-.dialog  a{
-  color: white;
-  text-decoration: none;
-}
-
-a.dialogActive {
-  color: gold;
-}
-
 .messages {
   padding: 10px;
 }
 
-.message {
-
-}
