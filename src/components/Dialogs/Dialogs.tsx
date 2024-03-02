@@ -1,49 +1,58 @@
-import { memo } from "react";
+import { ChangeEvent, memo, useState } from "react";
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
+import { DialogType, MessageType } from "../../types/dialog";
+import { StoreActionType } from "../../redux/state";
+import { sendMessageAction } from "../../redux/actions";
 
-export type DialogType ={
-  id: string,
-  name: string,
-}
+type DialogPropsType = {
+  dialogs: DialogType[];
+  messages: MessageType[];
+  dispatch: (action: StoreActionType) => void;
+};
 
-export type MessageType = {
-  id: string,
-  text: string,
-}
+function Dialogs(props: DialogPropsType) {
+  const [text, setText] = useState("");
 
-function Dialogs() {
-
-  const dialogsData: DialogType[] = [
-    {id: "1", name: "Anton"},
-    {id: "2", name: "Yulia"},
-    {id: "3", name: "Sasha"},
-  ]
-
-  const messageData: MessageType[] = [
-    { id: "1", text: "Hi"},
-    { id: "2", text: "Privet"},
-    { id: "3", text: "Goodbye"},
-  ]
+  const callbacks = {
+    onSend: () => {
+      if (text.trim()) {
+        props.dispatch(sendMessageAction(text.trim()));
+        setText("");
+      }
+    },
+    onTextChange: (e: ChangeEvent<HTMLTextAreaElement>) =>
+      setText(e.currentTarget.value),
+  };
 
   return (
     <div className={s.dialogPage}>
       <div className={s.dialogs}>
-        {dialogsData.map(item => (
-          <DialogItem key={item.id} title={item.name} id={item.id}  />
+        {props.dialogs.map((item) => (
+          <DialogItem key={item.id} title={item.name} id={item.id} />
         ))}
       </div>
       <div className={s.messages}>
-          {messageData.map(item => (
-            <MessageItem key={item.id} text={item.text} />
-          ))}
+        {props.messages.map((item) => (
+          <MessageItem key={item.id} text={item.text} />
+        ))}
+        <div>
+          <div>
+            <textarea
+              placeholder="Введите сообщение..."
+              rows={3}
+              value={text}
+              onChange={callbacks.onTextChange}
+            ></textarea>
+          </div>
+          <div>
+            <button onClick={callbacks.onSend}>Send</button>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
-
-
-
 
 export default memo(Dialogs);
