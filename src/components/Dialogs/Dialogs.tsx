@@ -3,13 +3,11 @@ import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
 import { DialogType, MessageType } from "../../types/dialog";
-import { StoreActionType } from "../../redux/state";
-import { sendMessageAction } from "../../redux/actions";
 
 type DialogPropsType = {
   dialogs: DialogType[];
   messages: MessageType[];
-  dispatch: (action: StoreActionType) => void;
+  sendMessage: (value: string) => void;
 };
 
 function Dialogs(props: DialogPropsType) {
@@ -18,7 +16,7 @@ function Dialogs(props: DialogPropsType) {
   const callbacks = {
     onSend: () => {
       if (text.trim()) {
-        props.dispatch(sendMessageAction(text.trim()));
+        props.sendMessage(text);
         setText("");
       }
     },

@@ -1,0 +1,1 @@
+import {default as posts} from './posts/types';

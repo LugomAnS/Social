@@ -1,13 +1,13 @@
-import React, { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import { PostType } from "../../../types/post";
-import { StoreActionType } from "../../../redux/state";
-import { addPostAction } from "../../../redux/actions";
+
+
 
 type MyPostsPropsType = {
   posts: PostType[];
-  dispatch: (value: StoreActionType) => void
+  addMessage: (value: string) => void
 }
 
 function MyPosts(props: MyPostsPropsType) {
@@ -15,7 +15,7 @@ function MyPosts(props: MyPostsPropsType) {
 
   const callbacks = {
     onAddPost: () => {
-      props.dispatch(addPostAction(text));
+      props.addMessage(text);
       setText('');
     },
     onChangeText: (e: ChangeEvent<HTMLTextAreaElement>) => setText(e.currentTarget.value),
